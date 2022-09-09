@@ -6,6 +6,7 @@ import InputWithTitle from 'components/InputWithTitle'
 import colors from 'utils/colors'
 import ShowReturns from 'components/ShowReturns'
 import { calculateSipReturns } from 'utils/calculate'
+import screens from 'constants/screens'
 
 const styles = StyleSheet.create({
   inputWrap: {
@@ -50,7 +51,14 @@ const SipCalculator = () => {
   }
 
   return (
-    <PageWrapper showHeader headerTitle='SIP Calculator'>
+    <PageWrapper
+      showHeader
+      headerProps={{
+        title: 'SIP Calculator',
+        showInfo: true,
+        infoPage: screens.sip,
+      }}
+    >
       <InputWithTitle
         name='Amount to invest (monthly): '
         inputProps={{

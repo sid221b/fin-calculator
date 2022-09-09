@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 
 import colors from 'utils/colors'
 import CustomText from 'components/CustomText'
-import screens from 'utils/screens'
+import { RootStackParamList } from 'constants/screens'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 const styles = StyleSheet.create({
   pageContainer: {
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 24,
     fontSize: 20,
+    lineHeight: 26,
     fontWeight: '500',
   },
   sub: {
@@ -43,14 +45,14 @@ const styles = StyleSheet.create({
 })
 
 const Home: React.FC = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const navigateToLumpSum = () => {
-    navigation.navigate(screens.lumpSum)
+    navigation.navigate('lumpSum')
   }
 
   const navigateToSip = () => {
-    navigation.navigate(screens.sip)
+    navigation.navigate('sip')
   }
 
   return (
@@ -58,9 +60,7 @@ const Home: React.FC = () => {
       <StatusBar backgroundColor={colors.dark.bg.bg0} />
       <ScrollView style={styles.contentWrapper}>
         <CustomText style={styles.title}>Calculators</CustomText>
-        <CustomText style={styles.sub}>
-          These are some useful finance calculators
-        </CustomText>
+        <CustomText style={styles.sub}>These are some useful finance calculators</CustomText>
         <Pressable onPress={navigateToLumpSum} style={styles.btnWrapper}>
           <CustomText style={styles.btnTxt}>Lumpsum Calculator</CustomText>
         </Pressable>

@@ -1,13 +1,13 @@
 interface CalculatorReturnsArgsType {
-  amount: number
-  rate: number
-  duration: number
+  amount: any
+  rate: any
+  duration: any
 }
 
-interface CalculatorFuncReturnType {
-  totalAmount: number
-  investedAmount: number
-  returns: number
+export interface CalculatorFuncReturnType {
+  totalAmount: any
+  investedAmount: any
+  returns: any
 }
 
 type NumberLike = number

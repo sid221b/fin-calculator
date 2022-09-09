@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput } from 'react-native'
+import { StyleSheet, TextInput, TextInputProps } from 'react-native'
 import React, { memo } from 'react'
 import colors from 'utils/colors'
 import { formatAmount, removeSymbolsFromAmount } from 'utils/amount'
@@ -11,22 +11,25 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 8,
     paddingHorizontal: 16,
-    paddingVertical: 4
+    paddingVertical: 4,
   },
-  styleProp: {}
+  styleProp: {},
 })
 
-const CustomText = ({
-  children,
+export interface CustomTextPropsType extends TextInputProps {
+  type: string
+}
+
+const CustomText: React.FC<CustomTextPropsType> = ({
   style = styles.styleProp,
   type,
   value,
-  onChangeText,
+  onChangeText = () => {},
   ...props
 }) => {
   const formattedVal = type === 'amount' ? formatAmount(value) : value
 
-  const onTextChange = txt => {
+  const onTextChange = (txt: string) => {
     if (type === 'amount') {
       return onChangeText(removeSymbolsFromAmount(txt))
     }

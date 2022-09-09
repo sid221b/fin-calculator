@@ -1,3 +1,6 @@
+import { ToWords } from 'to-words'
+const toWords = new ToWords()
+
 export const formatWithComma = (val: number, local = 'IN') => {
   if (local !== 'IN') {
     return (val || '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -11,15 +14,27 @@ export const formatWithComma = (val: number, local = 'IN') => {
   const res =
     otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') +
     lastThree +
-    (y ? y : '')
+    (String(val).includes('.') ? `.${y}` : '')
   return res
 }
 
-export const formatAmount = (val: number) => {
+export const formatAmount = (val: any) => {
   if (!val) return ''
   return `₹ ${formatWithComma(val)}`
 }
 
 export const removeSymbolsFromAmount = (str: string) => {
   return str ? (str || '').replace(/[^\d.-]/g, '') : str
+}
+
+export const numberToLocalText = (num: string | number | undefined): string => {
+  if (!num) return ''
+  num = Number(num)
+  if (num < 1) {
+    return toWords.convert(num, { currency: true, ignoreZeroCurrency: true })
+  }
+  if (num < 100) {
+    return toWords.convert(num, { currency: true, ignoreDecimal: false })
+  }
+  return toWords.convert(num, { currency: false, ignoreDecimal: true })
 }

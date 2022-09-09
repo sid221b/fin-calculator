@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
 })
 
 const LumpsumCalculator: React.FC = () => {
-  const [amount, setAmount] = useState(0)
-  const [rate, setRate] = useState(0)
-  const [duration, setDuration] = useState(0)
+  const [amount, setAmount] = useState('')
+  const [rate, setRate] = useState('')
+  const [duration, setDuration] = useState('')
   const [showReturns, setShowReturns] = useState(false)
   const [returnsData, setReturnsData] = useState({
     investedAmount: 0,
@@ -50,9 +50,13 @@ const LumpsumCalculator: React.FC = () => {
   }
 
   return (
-    <PageWrapper showHeader headerTitle="Lumpsum Calculator">
+    <PageWrapper
+      showHeader
+      headerProps={{ title: 'Lumpsum Calculator', showInfo: true, infoPage: 'lumpSum' }}
+    >
       <InputWithTitle
-        name="Amount: "
+        name='Amount: '
+        showWords
         inputProps={{
           onChangeText: setAmount,
           value: amount,
@@ -62,7 +66,7 @@ const LumpsumCalculator: React.FC = () => {
         }}
       />
       <InputWithTitle
-        name="Expected rate of return (P.A): "
+        name='Expected rate of return (P.A): '
         inputProps={{
           onChangeText: setRate,
           value: rate,
@@ -72,7 +76,7 @@ const LumpsumCalculator: React.FC = () => {
         }}
       />
       <InputWithTitle
-        name="Tenure (in years): "
+        name='Tenure (in years): '
         inputProps={{
           onChangeText: setDuration,
           value: duration,
