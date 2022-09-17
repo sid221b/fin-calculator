@@ -14,13 +14,7 @@ module.exports = {
         semi: ['error', 'never'],
         curly: 'off',
         'jsx-quotes': ['error', 'prefer-single'],
-        'prettier/prettier': [
-          'error',
-          { singleQuote: true },
-          {
-            usePrettierrc: true,
-          },
-        ],
+        'prettier/prettier': 0,
       },
     },
   ],
