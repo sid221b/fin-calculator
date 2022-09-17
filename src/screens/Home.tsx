@@ -78,12 +78,12 @@ const Home: React.FC = () => {
           <CustomText style={styles.btnTxt}>SIP Calculator</CustomText>
         </Pressable>
 
-        <Pressable onPress={navigateToCagr} style={styles.btnWrapper}>
-          <CustomText style={styles.btnTxt}>CAGR Calculator</CustomText>
-        </Pressable>
-
         <Pressable onPress={navigateToSwp} style={styles.btnWrapper}>
           <CustomText style={styles.btnTxt}>SWP Calculator</CustomText>
+        </Pressable>
+
+        <Pressable onPress={navigateToCagr} style={styles.btnWrapper}>
+          <CustomText style={styles.btnTxt}>CAGR Calculator</CustomText>
         </Pressable>
       </ScrollView>
     </SafeAreaView>

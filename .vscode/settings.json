@@ -3,5 +3,6 @@
   "[typescript]": { "editor.formatOnSave": true },
   "[typescriptreact]": { "editor.formatOnSave": true },
   "[javascriptreact]": { "editor.formatOnSave": true },
-  "editor.defaultFormatter": "numso.prettier-standard-vscode"
+  "editor.defaultFormatter": "numso.prettier-standard-vscode",
+  "editor.formatOnSave": true
 }
