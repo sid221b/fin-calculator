@@ -55,23 +55,35 @@ const Home: React.FC = () => {
     navigation.navigate('sip')
   }
 
+  const navigateToCagr = () => {
+    navigation.navigate('cagr')
+  }
+
+  const navigateToSwp = () => {
+    navigation.navigate('swp')
+  }
+
   return (
     <SafeAreaView style={styles.pageContainer}>
       <StatusBar backgroundColor={colors.dark.bg.bg0} />
       <ScrollView style={styles.contentWrapper}>
         <CustomText style={styles.title}>Calculators</CustomText>
         <CustomText style={styles.sub}>These are some useful finance calculators</CustomText>
+
         <Pressable onPress={navigateToLumpSum} style={styles.btnWrapper}>
           <CustomText style={styles.btnTxt}>Lumpsum Calculator</CustomText>
         </Pressable>
+
         <Pressable onPress={navigateToSip} style={styles.btnWrapper}>
           <CustomText style={styles.btnTxt}>SIP Calculator</CustomText>
         </Pressable>
-        <Pressable onPress={navigateToLumpSum} style={styles.btnWrapper}>
-          <CustomText style={styles.btnTxt}>Lumpsum Calculator</CustomText>
+
+        <Pressable onPress={navigateToCagr} style={styles.btnWrapper}>
+          <CustomText style={styles.btnTxt}>CAGR Calculator</CustomText>
         </Pressable>
-        <Pressable onPress={navigateToLumpSum} style={styles.btnWrapper}>
-          <CustomText style={styles.btnTxt}>Lumpsum Calculator</CustomText>
+
+        <Pressable onPress={navigateToSwp} style={styles.btnWrapper}>
+          <CustomText style={styles.btnTxt}>SWP Calculator</CustomText>
         </Pressable>
       </ScrollView>
     </SafeAreaView>

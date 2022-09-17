@@ -4,9 +4,8 @@ import PageWrapper from 'components/PageWrapper'
 import CustomText from 'components/CustomText'
 import InputWithTitle from 'components/InputWithTitle'
 import colors from 'utils/colors'
-import ShowReturns from 'components/ShowReturns'
-import { calculateSipReturns } from 'utils/calculate'
-import screens from 'constants/screens'
+import ShowReturns, { ShowCagrReturns } from 'components/ShowReturns'
+import { calculateCagr, calculateSwpReturns } from 'utils/calculate'
 
 const styles = StyleSheet.create({
   inputWrap: {
@@ -34,37 +33,47 @@ const styles = StyleSheet.create({
   },
 })
 
-const SipCalculator = () => {
-  const [amount, setAmount] = useState(0)
-  const [rate, setRate] = useState(0)
-  const [duration, setDuration] = useState(0)
+const SwpCalculator: React.FC = () => {
+  const [amount, setAmount] = useState<any>(0)
+  const [withdrawalPerMonth, setWithdrawalPerMonth] = useState<any>(0)
+  const [rate, setRate] = useState<any>(0)
+  const [duration, setDuration] = useState<any>(0)
   const [showReturns, setShowReturns] = useState(false)
-  const [returnsData, setReturnsData] = useState({
+  const [returnsData, setReturns] = useState({
     investedAmount: 0,
-    returns: 0,
-    totalAmount: 0,
+    finalAmount: 0,
+    totalWithdrawalAmount: 0,
   })
 
   const calculateReturns = () => {
     setShowReturns(true)
-    setReturnsData(calculateSipReturns({ amount, rate, duration }))
+    setReturns(
+      calculateSwpReturns({ amount, duration, rate, withdrawalAmountPerMonth: withdrawalPerMonth })
+    )
   }
 
   return (
     <PageWrapper
       showHeader
-      headerProps={{
-        title: 'SIP Calculator',
-        showInfo: true,
-        infoPage: screens.sip,
-      }}
+      headerProps={{ title: 'SWP Calculator', showInfo: true, infoPage: 'swp' }}
     >
       <InputWithTitle
-        name='Amount to invest (monthly): '
+        name='Invested Amount: '
         showWords
         inputProps={{
           onChangeText: setAmount,
           value: amount,
+          placeholder: '₹ 10,00,000',
+          keyboardType: 'numeric',
+          type: 'amount',
+        }}
+      />
+      <InputWithTitle
+        name='Withdrawal Amount Per Month: '
+        showWords
+        inputProps={{
+          onChangeText: setWithdrawalPerMonth,
+          value: withdrawalPerMonth,
           placeholder: '₹ 10,000',
           keyboardType: 'numeric',
           type: 'amount',
@@ -96,12 +105,12 @@ const SipCalculator = () => {
       {showReturns && (
         <ShowReturns
           investedAmount={returnsData.investedAmount}
-          returns={returnsData.returns}
-          totalAmount={returnsData.totalAmount}
+          totalWithdrawalAmount={returnsData.totalWithdrawalAmount}
+          totalAmount={returnsData.finalAmount}
         />
       )}
     </PageWrapper>
   )
 }
 
-export default SipCalculator
+export default SwpCalculator

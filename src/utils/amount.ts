@@ -27,7 +27,8 @@ export const removeSymbolsFromAmount = (str: string) => {
   return str ? (str || '').replace(/[^\d.-]/g, '') : str
 }
 
-export const numberToLocalText = (num: string | number | undefined): string => {
+export const numberToLocalText = (num: string | number | undefined, round = false): string => {
+  // const money = round && String(num).split('.')[0].length > 8 ? String(num).split('.')[0] : num
   if (!num) return ''
   num = Number(num)
   if (num < 1) {

@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   amountInWords: {
+    alignSelf: 'flex-end',
     fontSize: 12,
     color: colors.dark.text.secondary,
   },
@@ -29,11 +30,7 @@ interface InputWithTitlePropsType {
   showWords?: boolean
   inputProps: CustomTextPropsType
 }
-const InputWithTitle: React.FC<InputWithTitlePropsType> = ({
-  name,
-  showWords,
-  inputProps,
-}) => {
+const InputWithTitle: React.FC<InputWithTitlePropsType> = ({ name, showWords, inputProps }) => {
   return (
     <View style={styles.inputWrap}>
       <CustomText style={styles.inputTitle}>{name}</CustomText>
@@ -43,9 +40,7 @@ const InputWithTitle: React.FC<InputWithTitlePropsType> = ({
         {...inputProps}
       />
       {showWords && (
-        <CustomText style={styles.amountInWords}>
-          {numberToLocalText(inputProps.value)}
-        </CustomText>
+        <CustomText style={styles.amountInWords}>{numberToLocalText(inputProps.value)}</CustomText>
       )}
     </View>
   )

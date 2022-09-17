@@ -4,9 +4,8 @@ import PageWrapper from 'components/PageWrapper'
 import CustomText from 'components/CustomText'
 import InputWithTitle from 'components/InputWithTitle'
 import colors from 'utils/colors'
-import ShowReturns from 'components/ShowReturns'
-import { calculateSipReturns } from 'utils/calculate'
-import screens from 'constants/screens'
+import { ShowCagrReturns } from 'components/ShowReturns'
+import { calculateCagr } from 'utils/calculate'
 
 const styles = StyleSheet.create({
   inputWrap: {
@@ -34,50 +33,51 @@ const styles = StyleSheet.create({
   },
 })
 
-const SipCalculator = () => {
-  const [amount, setAmount] = useState(0)
-  const [rate, setRate] = useState(0)
-  const [duration, setDuration] = useState(0)
+const CagrCalculator: React.FC = () => {
+  const [amount, setAmount] = useState<any>('')
+  const [finalAmount, setFinalAmount] = useState<any>('')
+  const [duration, setDuration] = useState('')
   const [showReturns, setShowReturns] = useState(false)
-  const [returnsData, setReturnsData] = useState({
+  const [returnsData, setReturns] = useState({
+    cagr: 0,
     investedAmount: 0,
-    returns: 0,
-    totalAmount: 0,
+    finalAmount: 0,
   })
 
   const calculateReturns = () => {
     setShowReturns(true)
-    setReturnsData(calculateSipReturns({ amount, rate, duration }))
+    setReturns({
+      cagr: calculateCagr({ amount, finalAmount, duration }),
+      finalAmount,
+      investedAmount: amount,
+    })
   }
 
   return (
     <PageWrapper
       showHeader
-      headerProps={{
-        title: 'SIP Calculator',
-        showInfo: true,
-        infoPage: screens.sip,
-      }}
+      headerProps={{ title: 'CAGR Calculator', showInfo: true, infoPage: 'cagr' }}
     >
       <InputWithTitle
-        name='Amount to invest (monthly): '
+        name='Invested Amount: '
         showWords
         inputProps={{
           onChangeText: setAmount,
           value: amount,
-          placeholder: '₹ 10,000',
+          placeholder: '₹ 1,000',
           keyboardType: 'numeric',
           type: 'amount',
         }}
       />
       <InputWithTitle
-        name='Expected rate of return (annually): '
+        name='Final Amount: '
+        showWords
         inputProps={{
-          onChangeText: setRate,
-          value: rate,
-          placeholder: '12%',
+          onChangeText: setFinalAmount,
+          value: finalAmount,
+          placeholder: '₹ 10,000',
           keyboardType: 'numeric',
-          type: 'number',
+          type: 'amount',
         }}
       />
       <InputWithTitle
@@ -94,14 +94,14 @@ const SipCalculator = () => {
         <CustomText style={styles.ctaTxt}>Calculate Returns</CustomText>
       </Pressable>
       {showReturns && (
-        <ShowReturns
+        <ShowCagrReturns
           investedAmount={returnsData.investedAmount}
-          returns={returnsData.returns}
-          totalAmount={returnsData.totalAmount}
+          finalValue={returnsData.finalAmount}
+          cagr={returnsData.cagr}
         />
       )}
     </PageWrapper>
   )
 }
 
-export default SipCalculator
+export default CagrCalculator

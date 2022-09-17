@@ -4,7 +4,7 @@ import CustomText from './CustomText'
 import colors from 'utils/colors'
 import { scale } from 'utils/scaling'
 import { CalculatorFuncReturnType } from 'utils/calculate'
-import { formatWithComma } from 'utils/amount'
+import { formatWithComma, numberToLocalText } from 'utils/amount'
 
 const styles = StyleSheet.create({
   container: {
@@ -15,8 +15,10 @@ const styles = StyleSheet.create({
   },
   lineWrapper: {
     flexDirection: 'row',
-    marginBottom: 8,
     alignItems: 'center',
+  },
+  spacing: {
+    marginBottom: 8,
   },
   label: {
     width: scale(150),
@@ -29,34 +31,91 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'right',
   },
-  zeroSp: { marginBottom: 0 },
+  zeroSp: {
+    marginBottom: 0,
+  },
+  moneyWords: {
+    textAlign: 'right',
+    color: colors.dark.text.secondary,
+    fontSize: 10,
+    lineHeight: 14,
+    marginBottom: 14,
+  },
 })
 
-const ShowReturns: React.FC<CalculatorFuncReturnType> = ({
+interface CagrReturnPropTypes {
+  investedAmount: number
+  finalValue: number
+  cagr: number
+}
+
+export const ShowCagrReturns: React.FC<CagrReturnPropTypes> = ({
+  investedAmount,
+  finalValue,
+  cagr,
+}) => (
+  <View style={styles.container}>
+    <View style={[styles.lineWrapper, styles.spacing]}>
+      <CustomText style={styles.label}>Invested Amount:</CustomText>
+      <CustomText style={styles.value}>₹ {formatWithComma(investedAmount)}</CustomText>
+    </View>
+    <View style={[styles.lineWrapper, styles.spacing]}>
+      <CustomText style={styles.label}>Final Amount:</CustomText>
+      <CustomText style={styles.value}>₹ {formatWithComma(finalValue)}</CustomText>
+    </View>
+    <View style={[styles.lineWrapper, styles.zeroSp]}>
+      <CustomText style={styles.label}>CAGR:</CustomText>
+      <CustomText style={styles.value}>{cagr}%</CustomText>
+    </View>
+  </View>
+)
+
+interface ShowReturnProps extends Omit<CalculatorFuncReturnType, 'returns'> {
+  totalWithdrawalAmount?: number
+  returns?: number
+}
+
+const ShowReturns: React.FC<ShowReturnProps> = ({
   totalAmount,
   investedAmount,
   returns,
+  totalWithdrawalAmount,
 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.lineWrapper}>
         <CustomText style={styles.label}>Invested Amount:</CustomText>
-        <CustomText style={styles.value}>
-          ₹ {formatWithComma(investedAmount)}
-        </CustomText>
+        <CustomText style={styles.value}>₹ {formatWithComma(investedAmount)}</CustomText>
       </View>
-      <View style={styles.lineWrapper}>
-        <CustomText style={styles.label}>Estimated Returns:</CustomText>
-        <CustomText style={styles.value}>
-          ₹ {formatWithComma(returns)}
-        </CustomText>
-      </View>
+      <CustomText style={styles.moneyWords}>{numberToLocalText(investedAmount)}</CustomText>
+
+      {returns && (
+        <>
+          <View style={styles.lineWrapper}>
+            <CustomText style={styles.label}>Estimated Returns:</CustomText>
+            <CustomText style={styles.value}>₹ {formatWithComma(returns)}</CustomText>
+          </View>
+          <CustomText style={styles.moneyWords}>{numberToLocalText(returns)}</CustomText>
+        </>
+      )}
+
+      {totalWithdrawalAmount && (
+        <>
+          <View style={styles.lineWrapper}>
+            <CustomText style={styles.label}>Total Withdrawal Amount:</CustomText>
+            <CustomText style={styles.value}>₹ {formatWithComma(totalWithdrawalAmount)}</CustomText>
+          </View>
+          <CustomText style={styles.moneyWords}>
+            {numberToLocalText(totalWithdrawalAmount)}
+          </CustomText>
+        </>
+      )}
+
       <View style={[styles.lineWrapper, styles.zeroSp]}>
         <CustomText style={styles.label}>Total Value:</CustomText>
-        <CustomText style={styles.value}>
-          ₹ {formatWithComma(totalAmount)}
-        </CustomText>
+        <CustomText style={styles.value}>₹ {formatWithComma(totalAmount)}</CustomText>
       </View>
+      <CustomText style={styles.moneyWords}>{numberToLocalText(totalAmount)}</CustomText>
     </View>
   )
 }

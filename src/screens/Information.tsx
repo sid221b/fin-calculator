@@ -4,7 +4,6 @@ import { useRoute } from '@react-navigation/native'
 import calculatorInfo, { FaqType } from 'constants/calculatorInfo'
 import { RootRouteProps } from 'constants/screens'
 import PageWrapper from 'components/PageWrapper'
-import images from 'assets/images'
 import CustomText from 'components/CustomText'
 import colors from 'utils/colors'
 
@@ -26,15 +25,15 @@ const styles = StyleSheet.create({
 })
 
 const Information = () => {
-  const route = useRoute<RootRouteProps<'information'>>()
-  const data = route.params.screen ? calculatorInfo[route.params.screen] : undefined
+  const { params } = useRoute<RootRouteProps<'information'>>()
+  const data = params.screen ? calculatorInfo[params.screen] : undefined
 
-  if (!data || !route.params.screen) return null
+  if (!data || !params.screen) return null
 
   const { title, faqs } = data || {}
 
   return (
-    <PageWrapper showHeader headerProps={{ title, backIcon: images.closeIcon }}>
+    <PageWrapper showHeader headerProps={{ title, showCross: true }}>
       <View style={styles.content}>
         {(faqs || []).map(({ ques, ans }: FaqType) => (
           <View key={ques} style={styles.faqWrapper}>

@@ -12,7 +12,7 @@ export interface HeaderPropsType {
   title: string
   showInfo?: boolean
   infoPage?: CalcInfoType
-  backIcon?: string
+  showCross?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -30,9 +30,17 @@ const styles = StyleSheet.create({
     left: 24,
     top: 10,
   },
+  cross: {
+    left: 16,
+    top: 14,
+  },
   homeIcon: {
     height: 26,
     width: 26,
+  },
+  crossIcon: {
+    height: 20,
+    width: 20,
   },
   header: {
     fontSize: 18,
@@ -46,12 +54,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Header: React.FC<HeaderPropsType> = ({
-  title,
-  showInfo,
-  infoPage,
-  backIcon = images.homeIcon,
-}) => {
+const Header: React.FC<HeaderPropsType> = ({ title, showInfo, infoPage, showCross = false }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const goBack = () => {
@@ -66,8 +69,12 @@ const Header: React.FC<HeaderPropsType> = ({
 
   return (
     <View style={styles.wrapper}>
-      <Pressable style={styles.home} onPress={goBack}>
-        <Image source={backIcon} resizeMode='contain' style={styles.homeIcon} />
+      <Pressable style={[styles.home, showCross && styles.cross]} onPress={goBack}>
+        <Image
+          source={showCross ? images.closeIcon : images.homeIcon}
+          resizeMode='contain'
+          style={[styles.homeIcon, showCross && styles.crossIcon]}
+        />
       </Pressable>
       <CustomText style={styles.header}>{title}</CustomText>
       {showInfo && infoPage && (

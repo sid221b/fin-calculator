@@ -1,4 +1,5 @@
 import { RouteProp } from '@react-navigation/native'
+import { CalcInfoType } from './calculatorInfo'
 
 const screens = {
   home: 'home',
@@ -13,7 +14,8 @@ export type RootStackParamList = {
   lumpSum: undefined
   sip: undefined
   swp: undefined
-  information: { screen: string }
+  cagr: undefined
+  information: { screen: CalcInfoType }
 }
 
 export type RootRouteProps<RouteName extends keyof RootStackParamList> = RouteProp<

@@ -8,6 +8,8 @@ import LumpsumCalculator from 'screens/LumpsumCalculator'
 import SipCalculator from 'screens/SipCalculator'
 import React from 'react'
 import Information from 'screens/Information'
+import CagrCalculator from 'screens/CagrCalculator'
+import SwpCalculator from 'screens/SwpCalculator'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -22,6 +24,8 @@ const AppRoutes: React.FC = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen name='sip' component={SipCalculator} options={{ headerShown: false }} />
+        <Stack.Screen name='cagr' component={CagrCalculator} options={{ headerShown: false }} />
+        <Stack.Screen name='swp' component={SwpCalculator} options={{ headerShown: false }} />
         <Stack.Screen name='information' component={Information} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -54,15 +54,60 @@ const calculatorInfo = {
       },
     ],
   },
+  cagr: {
+    title: 'Compound Annual Growth Rate (CAGR)',
+    faqs: [
+      {
+        ques: 'What is Compound Annual Growth Rate (CAGR)?',
+        ans:
+          'The compound annual growth rate, or CAGR for short, is the average rate at which some value (investment) grows over a certain period of time assuming the value has been compounding over that time period.',
+      },
+      {
+        ques: 'Where CAGR Calculator matters ?',
+        ans:
+          'The compound annual growth are applied at various places of personal finance. It is often used to calculate the average growth of single investment over a certain period. CAGR can be applied in comparing return on equity with bonds or savng accounts. Further, it can be used to compare the performance of two companies and forecasting their future growth based on their historical data.',
+      },
+      {
+        ques: 'Limitation of CAGR ?',
+        ans:
+          'CAGR doesn’t accounts for volatility. It calculates only the average percentage return and so CAGR values should never taken as only tool for investment return assessment.',
+      },
+    ],
+  },
+  swp: {
+    title: 'Systematic Withdrawal Plan (SWP)',
+    faqs: [
+      {
+        ques: 'What is SWP?',
+        ans:
+          'Systematic Withdrawal Plan or SWP is a mutual fund investment facility which allows you to draw a fixed amount from your mutual fund investments at a specified frequency (monthly, quarterly, annual etc.); you can specify the day of the month/ quarter when the withdrawal should be made and the amount will be credited directly to your bank account on the specified day. You can continue your SWP as long as there are balance units in your mutual fund scheme account.',
+      },
+      {
+        ques: 'How does SWP work?',
+        ans:
+          'SWP generates cash-flows by redeeming units of your mutual fund scheme. The number of units redeemed for each SWP payout will depend on the SWP amount (as specified by you) and the prevailing NAV on the date when the SWP payment is made.',
+      },
+      {
+        ques: 'When can one use an SWP?',
+        ans:
+          'When an investor needs a consistent cash flow from his/her investments, he/she might opt for an SWP. Every person’s need for a SWP is different. SWP can be used for a variety of purposes, including children’s education, EMI repayment, and retirement.',
+      },
+      {
+        ques: 'How does long-term and short-term capital gain affect my tax implications?',
+        ans: `For equity-oriented scheme: If your holding period is less than 1 year, the gains will be calculated as short-term capital gains and will be taxed at 15% and if the holding period is more than 1 year, then long-term capital gains tax of 10% will be levied if the total capital gains exceed ₹1,00,000 in a year.
+        \nFor debt-oriented scheme: If your holding period is less than 3 years, gains will be calculated as short-term capital gains and will be taxed as per the investors’ tax slab and if the holding period is more than 3 years, then long-term capital gains tax of 20% will be levied with the benefit of indexation.`,
+      },
+    ],
+  },
 }
 
-export type CalcInfoType = 'sip' | 'lumpSum'
+export type CalcInfoType = 'sip' | 'lumpSum' | 'cagr' | 'swp'
 
 export type FaqType = { ques: string; ans: string }
 
 export interface PageInfoType {
   title: string
-  faqs: Faq[]
+  faqs: FaqType[]
 }
 
 export default calculatorInfo
