@@ -3,10 +3,10 @@ const toWords = new ToWords()
 
 export const formatWithComma = (val: number, local = 'IN') => {
   if (local !== 'IN') {
-    return (val || '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
 
-  const [x, y] = val.toString().split('.')
+  const [x, y] = String(val).split('.')
 
   let lastThree = x.substring(x.length - 3)
   const otherNumbers = x.substring(0, x.length - 3)
@@ -29,7 +29,7 @@ export const removeSymbolsFromAmount = (str: string) => {
 
 export const numberToLocalText = (num: string | number | undefined, round = false): string => {
   // const money = round && String(num).split('.')[0].length > 8 ? String(num).split('.')[0] : num
-  if (!num) return ''
+  if (!num || isNaN(Number(num))) return ''
   num = Number(num)
   if (num < 1) {
     return toWords.convert(num, { currency: true, ignoreZeroCurrency: true })

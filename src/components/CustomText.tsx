@@ -5,7 +5,7 @@ import colors from 'utils/colors'
 const CustomText: React.FC<TextProps> = ({ children, style = styles.styleProp, ...props }) => {
   return (
     <Text style={[styles.default, style]} allowFontScaling {...props}>
-      {children}
+      {String(children)}
     </Text>
   )
 }

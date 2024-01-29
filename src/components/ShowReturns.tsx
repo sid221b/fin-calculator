@@ -89,7 +89,7 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
       </View>
       <CustomText style={styles.moneyWords}>{numberToLocalText(investedAmount)}</CustomText>
 
-      {returns && (
+      {!!returns && (
         <>
           <View style={styles.lineWrapper}>
             <CustomText style={styles.label}>Estimated Returns:</CustomText>
@@ -99,7 +99,7 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
         </>
       )}
 
-      {totalWithdrawalAmount && (
+      {!!totalWithdrawalAmount && (
         <>
           <View style={styles.lineWrapper}>
             <CustomText style={styles.label}>Total Withdrawal Amount:</CustomText>
