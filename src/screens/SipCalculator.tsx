@@ -34,10 +34,16 @@ const styles = StyleSheet.create({
   },
 })
 
+const defaultValues = {
+  rate: '12',
+  duration: '5',
+  amount: '10000',
+}
+
 const SipCalculator = () => {
-  const [amount, setAmount] = useState(0)
-  const [rate, setRate] = useState(0)
-  const [duration, setDuration] = useState(0)
+  const [amount, setAmount] = useState<string | undefined>()
+  const [rate, setRate] = useState<string | undefined>()
+  const [duration, setDuration] = useState<string | undefined>()
   const [showReturns, setShowReturns] = useState(false)
   const [returnsData, setReturnsData] = useState({
     investedAmount: 0,
@@ -46,8 +52,17 @@ const SipCalculator = () => {
   })
 
   const calculateReturns = () => {
+    if (!amount) setAmount(defaultValues.amount)
+    if (!rate) setRate(defaultValues.rate)
+    if (!duration) setDuration(defaultValues.duration)
     setShowReturns(true)
-    setReturnsData(calculateSipReturns({ amount, rate, duration }))
+    setReturnsData(
+      calculateSipReturns({
+        amount: amount || defaultValues.amount,
+        rate: rate || defaultValues.rate,
+        duration: duration || defaultValues.duration,
+      })
+    )
   }
 
   return (
@@ -57,8 +72,7 @@ const SipCalculator = () => {
         title: 'SIP Calculator',
         showInfo: true,
         infoPage: screens.sip,
-      }}
-    >
+      }}>
       <InputWithTitle
         name='Amount to invest (monthly): '
         showWords

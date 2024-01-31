@@ -29,13 +29,14 @@ const styles = StyleSheet.create({
     color: colors.dark.text.secondary,
   },
   btnWrapper: {
-    paddingVertical: 8,
-    marginBottom: 16,
+    paddingVertical: 10,
+    marginBottom: 18,
     borderColor: colors.dark.button.primary,
     borderWidth: 2,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 20,
   },
   btnTxt: {
     color: colors.dark.text.primary,

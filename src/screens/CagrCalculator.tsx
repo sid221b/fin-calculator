@@ -33,31 +33,43 @@ const styles = StyleSheet.create({
   },
 })
 
+const defaultValues = {
+  duration: '5',
+  finalAmount: '10000',
+  amount: '1000',
+}
+
 const CagrCalculator: React.FC = () => {
-  const [amount, setAmount] = useState<any>('')
-  const [finalAmount, setFinalAmount] = useState<any>('')
-  const [duration, setDuration] = useState('')
+  const [amount, setAmount] = useState<string | undefined>()
+  const [finalAmount, setFinalAmount] = useState<string | undefined>()
+  const [duration, setDuration] = useState<string | undefined>()
   const [showReturns, setShowReturns] = useState(false)
-  const [returnsData, setReturns] = useState({
-    cagr: 0,
-    investedAmount: 0,
-    finalAmount: 0,
+  const [returnsData, setReturns] = useState<any>({
+    cagr: '',
+    investedAmount: '',
+    finalAmount: '',
   })
 
   const calculateReturns = () => {
+    if (!amount) setAmount(defaultValues.amount)
+    if (!finalAmount) setFinalAmount(defaultValues.finalAmount)
+    if (!duration) setDuration(defaultValues.duration)
     setShowReturns(true)
     setReturns({
-      cagr: calculateCagr({ amount, finalAmount, duration }),
-      finalAmount,
-      investedAmount: amount,
+      cagr: calculateCagr({
+        amount: amount || defaultValues.amount,
+        finalAmount: finalAmount || defaultValues.finalAmount,
+        duration: duration || defaultValues.duration,
+      }),
+      finalAmount: finalAmount || defaultValues.finalAmount,
+      investedAmount: amount || defaultValues.amount,
     })
   }
 
   return (
     <PageWrapper
       showHeader
-      headerProps={{ title: 'CAGR Calculator', showInfo: true, infoPage: 'cagr' }}
-    >
+      headerProps={{ title: 'CAGR Calculator', showInfo: true, infoPage: 'cagr' }}>
       <InputWithTitle
         name='Invested Amount: '
         showWords

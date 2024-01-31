@@ -33,11 +33,18 @@ const styles = StyleSheet.create({
   },
 })
 
+const defaultValues = {
+  rate: '12',
+  duration: '5',
+  amount: '1000000',
+  withdrawalPerMonth: '10000',
+}
+
 const SwpCalculator: React.FC = () => {
-  const [amount, setAmount] = useState<any>(0)
-  const [withdrawalPerMonth, setWithdrawalPerMonth] = useState<any>(0)
-  const [rate, setRate] = useState<any>(0)
-  const [duration, setDuration] = useState<any>(0)
+  const [amount, setAmount] = useState<string | undefined>()
+  const [withdrawalPerMonth, setWithdrawalPerMonth] = useState<string | undefined>()
+  const [rate, setRate] = useState<string | undefined>()
+  const [duration, setDuration] = useState<string | undefined>()
   const [showReturns, setShowReturns] = useState(false)
   const [returnsData, setReturns] = useState({
     investedAmount: 0,
@@ -46,17 +53,25 @@ const SwpCalculator: React.FC = () => {
   })
 
   const calculateReturns = () => {
+    if (!amount) setAmount(defaultValues.amount)
+    if (!rate) setRate(defaultValues.rate)
+    if (!duration) setDuration(defaultValues.duration)
+    if (!withdrawalPerMonth) setWithdrawalPerMonth(defaultValues.withdrawalPerMonth)
     setShowReturns(true)
     setReturns(
-      calculateSwpReturns({ amount, duration, rate, withdrawalAmountPerMonth: withdrawalPerMonth })
+      calculateSwpReturns({
+        amount: amount || defaultValues.amount,
+        rate: rate || defaultValues.rate,
+        duration: duration || defaultValues.duration,
+        withdrawalAmountPerMonth: withdrawalPerMonth || defaultValues.withdrawalPerMonth,
+      })
     )
   }
 
   return (
     <PageWrapper
       showHeader
-      headerProps={{ title: 'SWP Calculator', showInfo: true, infoPage: 'swp' }}
-    >
+      headerProps={{ title: 'SWP Calculator', showInfo: true, infoPage: 'swp' }}>
       <InputWithTitle
         name='Invested Amount: '
         showWords

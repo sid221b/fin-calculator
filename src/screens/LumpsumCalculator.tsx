@@ -33,6 +33,12 @@ const styles = StyleSheet.create({
   },
 })
 
+const defaultValues = {
+  rate: '12',
+  duration: '5',
+  amount: '10000',
+}
+
 const LumpsumCalculator: React.FC = () => {
   const [amount, setAmount] = useState<string | undefined>()
   const [rate, setRate] = useState<string | undefined>()
@@ -45,12 +51,16 @@ const LumpsumCalculator: React.FC = () => {
   })
 
   const calculateReturns = () => {
-    if (!amount) setAmount('10000')
-    if (!rate) setRate('12')
-    if (!duration) setDuration('5')
+    if (!amount) setAmount(defaultValues.amount)
+    if (!rate) setRate(defaultValues.rate)
+    if (!duration) setDuration(defaultValues.duration)
     setShowReturns(true)
     setReturnsData(
-      clacLumpSumReturn({ amount: amount || 10000, rate: rate || 12, duration: duration || 5 })
+      clacLumpSumReturn({
+        amount: amount || defaultValues.amount,
+        rate: rate || defaultValues.rate,
+        duration: duration || defaultValues.duration,
+      })
     )
   }
 

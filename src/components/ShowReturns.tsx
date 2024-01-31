@@ -57,15 +57,15 @@ export const ShowCagrReturns: React.FC<CagrReturnPropTypes> = ({
   <View style={styles.container}>
     <View style={[styles.lineWrapper, styles.spacing]}>
       <CustomText style={styles.label}>Invested Amount:</CustomText>
-      <CustomText style={styles.value}>₹ {formatWithComma(investedAmount)}</CustomText>
+      <CustomText style={styles.value}>{`₹ ${formatWithComma(investedAmount)}`}</CustomText>
     </View>
     <View style={[styles.lineWrapper, styles.spacing]}>
       <CustomText style={styles.label}>Final Amount:</CustomText>
-      <CustomText style={styles.value}>₹ {formatWithComma(finalValue)}</CustomText>
+      <CustomText style={styles.value}>{`₹ ${formatWithComma(finalValue)}`}</CustomText>
     </View>
     <View style={[styles.lineWrapper, styles.zeroSp]}>
       <CustomText style={styles.label}>CAGR:</CustomText>
-      <CustomText style={styles.value}>{cagr}%</CustomText>
+      <CustomText style={styles.value}>{`${cagr}%`}</CustomText>
     </View>
   </View>
 )
@@ -85,7 +85,7 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
     <View style={styles.container}>
       <View style={styles.lineWrapper}>
         <CustomText style={styles.label}>Invested Amount:</CustomText>
-        <CustomText style={styles.value}>₹ {formatWithComma(investedAmount)}</CustomText>
+        <CustomText style={styles.value}>{`₹ ${formatWithComma(investedAmount)}`}</CustomText>
       </View>
       <CustomText style={styles.moneyWords}>{numberToLocalText(investedAmount)}</CustomText>
 
@@ -93,7 +93,7 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
         <>
           <View style={styles.lineWrapper}>
             <CustomText style={styles.label}>Estimated Returns:</CustomText>
-            <CustomText style={styles.value}>₹ {formatWithComma(returns)}</CustomText>
+            <CustomText style={styles.value}>{`₹ ${formatWithComma(returns)}`}</CustomText>
           </View>
           <CustomText style={styles.moneyWords}>{numberToLocalText(returns)}</CustomText>
         </>
@@ -103,7 +103,9 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
         <>
           <View style={styles.lineWrapper}>
             <CustomText style={styles.label}>Total Withdrawal Amount:</CustomText>
-            <CustomText style={styles.value}>₹ {formatWithComma(totalWithdrawalAmount)}</CustomText>
+            <CustomText style={styles.value}>{`₹ ${formatWithComma(
+              totalWithdrawalAmount
+            )}`}</CustomText>
           </View>
           <CustomText style={styles.moneyWords}>
             {numberToLocalText(totalWithdrawalAmount)}
@@ -113,7 +115,7 @@ const ShowReturns: React.FC<ShowReturnProps> = ({
 
       <View style={[styles.lineWrapper, styles.zeroSp]}>
         <CustomText style={styles.label}>Total Value:</CustomText>
-        <CustomText style={styles.value}>₹ {formatWithComma(totalAmount)}</CustomText>
+        <CustomText style={styles.value}>{`₹ ${formatWithComma(totalAmount)}`}</CustomText>
       </View>
       <CustomText style={styles.moneyWords}>{numberToLocalText(totalAmount)}</CustomText>
     </View>
